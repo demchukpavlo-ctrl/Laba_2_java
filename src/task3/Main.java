@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("=== Завдання 3. Клас Calendar ===\n");
+        System.out.println(" Завдання 3. Клас Calendar \n");
 
         // 1. Обробка введених даних
         if (args.length == 2) {
@@ -24,7 +24,7 @@ public class Main {
         }
 
         // 2. Демонстрація конструкторів
-        System.out.println("\n--- Конструктори ---");
+        System.out.println("\n Конструктори ");
         Calendar c1 = new Calendar();
         Calendar c2 = new Calendar(32, 2002);
         Calendar c3 = new Calendar("60, 2024");
@@ -36,7 +36,7 @@ public class Main {
         System.out.println("Копія c2:        " + c4);
 
         // 3. Методи об'єкта
-        System.out.println("\n--- Методи ---");
+        System.out.println("\n Методи ");
         Calendar last = new Calendar(365, 2025);
         System.out.println("365-й день 2025: " + last);
         System.out.println("Наступний день:  " + last.next());
@@ -48,20 +48,20 @@ public class Main {
         System.out.println("17.11.2026 — це " + today.getDayOfYear() + "-й день року: " + today);
 
         // 4. Статичні методи
-        System.out.println("\n--- Статичні методи ---");
+        System.out.println("\n Статичні методи ");
         System.out.println("2024 високосний: " + Calendar.isLeapYear(2024)
                 + ", 1900: " + Calendar.isLeapYear(1900) + ", 2000: " + Calendar.isLeapYear(2000));
         System.out.println("Днів у лютому 2024: " + Calendar.daysInMonth(2, 2024));
         System.out.println("Днів у 2026 році: " + Calendar.daysInYear(2026));
 
         // 5. equals
-        System.out.println("\n--- equals ---");
+        System.out.println("\n equals ");
         System.out.println("c2.equals(c4): " + c2.equals(c4));
         System.out.println("c2.equals(c3): " + c2.equals(c3));
 
         // 6. Некоректні дані
-        System.out.println("\n--- Некоректні дані ---");
-        String[] bad = {"366 2023", "0 2020", "abc 2020"};
+        System.out.println("\n Некоректні дані ");
+        String[] bad = { "366 2023", "0 2020", "abc 2020" };
         for (String s : bad) {
             try {
                 new Calendar(s);

@@ -13,8 +13,8 @@ public class Rectangle implements Comparable<Rectangle> {
     /** Кількість створених прямокутників. */
     private static int count;
 
-    private double a;   // перша сторона
-    private double b;   // друга сторона
+    private double a; // перша сторона
+    private double b; // друга сторона
 
     static {
         count = 0;
@@ -46,7 +46,7 @@ public class Rectangle implements Comparable<Rectangle> {
         this(other.a, other.b);
     }
 
-    /* ---------- методи ---------- */
+    /* методи */
 
     public double perimeter() {
         return 2 * (a + b);
@@ -66,19 +66,23 @@ public class Rectangle implements Comparable<Rectangle> {
 
     /**
      * Порівняння з іншим прямокутником за площею.
-     * @return від'ємне число, 0 або додатне число, якщо цей прямокутник менший, рівний або більший
+     * 
+     * @return від'ємне число, 0 або додатне число, якщо цей прямокутник менший,
+     *         рівний або більший
      */
     @Override
     public int compareTo(Rectangle other) {
         double diff = area() - other.area();
-        if (Math.abs(diff) < EPS) return 0;
+        if (Math.abs(diff) < EPS)
+            return 0;
         return diff < 0 ? -1 : 1;
     }
 
     /** Текстовий результат порівняння з іншим прямокутником (за площею). */
     public String compareWith(Rectangle other) {
         int c = compareTo(other);
-        if (c == 0) return equals(other) ? "рівні" : "рівновеликі (однакова площа)";
+        if (c == 0)
+            return equals(other) ? "рівні" : "рівновеликі (однакова площа)";
         return c < 0 ? "менший" : "більший";
     }
 
@@ -94,7 +98,8 @@ public class Rectangle implements Comparable<Rectangle> {
 
     /** Коефіцієнт подібності до іншого прямокутника (або -1, якщо не подібні). */
     public double similarityCoefficient(Rectangle other) {
-        if (!isSimilar(other)) return -1;
+        if (!isSimilar(other))
+            return -1;
         return Math.max(a, b) / Math.max(other.a, other.b);
     }
 
@@ -103,7 +108,7 @@ public class Rectangle implements Comparable<Rectangle> {
         return new Rectangle(a * k, b * k);
     }
 
-    /* ---------- статичні методи ---------- */
+    /* статичні методи */
 
     public static int getCount() {
         return count;
@@ -119,13 +124,23 @@ public class Rectangle implements Comparable<Rectangle> {
         return r1.compareTo(r2) >= 0 ? r1 : r2;
     }
 
-    /* ---------- гетери та сетери ---------- */
+    /* гетери та сетери */
 
-    public double getA() { return a; }
-    public double getB() { return b; }
+    public double getA() {
+        return a;
+    }
 
-    public void setA(double a) { setSides(a, this.b); }
-    public void setB(double b) { setSides(this.a, b); }
+    public double getB() {
+        return b;
+    }
+
+    public void setA(double a) {
+        setSides(a, this.b);
+    }
+
+    public void setB(double b) {
+        setSides(this.a, b);
+    }
 
     public void setSides(double a, double b) {
         if (a <= 0 || b <= 0 || Double.isNaN(a) || Double.isNaN(b)) {
@@ -135,18 +150,22 @@ public class Rectangle implements Comparable<Rectangle> {
         this.b = b;
     }
 
-    /* ---------- перевизначені методи Object ---------- */
+    /* перевизначені методи Object */
 
     @Override
     public String toString() {
         return String.format("Rectangle{a=%.2f, b=%.2f, P=%.2f, S=%.2f}", a, b, perimeter(), area());
     }
 
-    /** Прямокутники рівні, якщо мають однакові сторони (порядок сторін не важливий). */
+    /**
+     * Прямокутники рівні, якщо мають однакові сторони (порядок сторін не важливий).
+     */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Rectangle other)) return false;
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Rectangle other))
+            return false;
         return (Double.compare(a, other.a) == 0 && Double.compare(b, other.b) == 0)
                 || (Double.compare(a, other.b) == 0 && Double.compare(b, other.a) == 0);
     }

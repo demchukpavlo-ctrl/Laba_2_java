@@ -11,34 +11,34 @@ import java.util.Objects;
  */
 public class Payment {
 
-    /* ---------- статичні поля ---------- */
+    /* статичні поля */
     /** Кількість створених об'єктів Payment. */
     private static int count;
     /** Податок за замовчуванням, %: ПДФО 18% + військовий збір 5%. */
     private static double defaultTaxPercent = 23.0;
 
-    /* ---------- поля об'єкта ---------- */
-    private String lastName;        // прізвище
-    private String firstName;       // ім'я
-    private double salary;          // оклад, грн
-    private int hireYear;           // рік поступлення на роботу
-    private double bonusPercent;    // відсоток надбавки
-    private double taxPercent;      // податок, %
-    private int workedDays;         // відпрацьовано днів у місяці
-    private int daysInMonth;        // робочих днів у місяці
-    private double accrued;         // нарахована сума
-    private double withheld;        // утримана сума
+    /* поля об'єкта */
+    private String lastName; // прізвище
+    private String firstName; // ім'я
+    private double salary; // оклад, грн
+    private int hireYear; // рік поступлення на роботу
+    private double bonusPercent; // відсоток надбавки
+    private double taxPercent; // податок, %
+    private int workedDays; // відпрацьовано днів у місяці
+    private int daysInMonth; // робочих днів у місяці
+    private double accrued; // нарахована сума
+    private double withheld; // утримана сума
 
-    /* ---------- статичний ініціалізатор ---------- */
+    /* статичний ініціалізатор */
     static {
         count = 0;
     }
 
-    /* ---------- нестатичний ініціалізатор (виконується перед кожним конструктором) ---------- */
+    /* нестатичний ініціалізатор (виконується перед кожним конструктором) */
     {
         lastName = "Невідомий";
         firstName = "Н.";
-        salary = 8000.0;                       // мінімальна зарплата
+        salary = 8000.0; // мінімальна зарплата
         hireYear = Year.now().getValue();
         bonusPercent = 0.0;
         taxPercent = defaultTaxPercent;
@@ -47,7 +47,7 @@ public class Payment {
         count++;
     }
 
-    /* ---------- конструктори ---------- */
+    /* конструктори */
 
     /** Конструктор без параметрів: усі поля зі значеннями ініціалізатора. */
     public Payment() {
@@ -63,7 +63,7 @@ public class Payment {
 
     /** Повний конструктор. */
     public Payment(String lastName, String firstName, double salary, int hireYear,
-                   double bonusPercent, double taxPercent, int workedDays, int daysInMonth) {
+            double bonusPercent, double taxPercent, int workedDays, int daysInMonth) {
         setName(lastName, firstName);
         setSalary(salary);
         setHireYear(hireYear);
@@ -79,9 +79,12 @@ public class Payment {
                 other.bonusPercent, other.taxPercent, other.workedDays, other.daysInMonth);
     }
 
-    /* ---------- основні методи ---------- */
+    /* основні методи */
 
-    /** Обчислення нарахованої суми: оклад пропорційно відпрацьованим дням + надбавка. */
+    /**
+     * Обчислення нарахованої суми: оклад пропорційно відпрацьованим дням +
+     * надбавка.
+     */
     public double calculateAccrued() {
         double base = salary * workedDays / daysInMonth;
         accrued = round2(base * (1 + bonusPercent / 100.0));
@@ -110,7 +113,7 @@ public class Payment {
         calculateWithheld();
     }
 
-    /* ---------- статичні методи ---------- */
+    /* статичні методи */
 
     public static int getCount() {
         return count;
@@ -136,18 +139,47 @@ public class Payment {
         return Math.round(value * 100.0) / 100.0;
     }
 
-    /* ---------- гетери та сетери ---------- */
+    /* гетери та сетери */
 
-    public String getLastName() { return lastName; }
-    public String getFirstName() { return firstName; }
-    public double getSalary() { return salary; }
-    public int getHireYear() { return hireYear; }
-    public double getBonusPercent() { return bonusPercent; }
-    public double getTaxPercent() { return taxPercent; }
-    public int getWorkedDays() { return workedDays; }
-    public int getDaysInMonth() { return daysInMonth; }
-    public double getAccrued() { return accrued; }
-    public double getWithheld() { return withheld; }
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public int getHireYear() {
+        return hireYear;
+    }
+
+    public double getBonusPercent() {
+        return bonusPercent;
+    }
+
+    public double getTaxPercent() {
+        return taxPercent;
+    }
+
+    public int getWorkedDays() {
+        return workedDays;
+    }
+
+    public int getDaysInMonth() {
+        return daysInMonth;
+    }
+
+    public double getAccrued() {
+        return accrued;
+    }
+
+    public double getWithheld() {
+        return withheld;
+    }
 
     public void setName(String lastName, String firstName) {
         if (lastName == null || lastName.isBlank() || firstName == null || firstName.isBlank()) {
@@ -158,7 +190,8 @@ public class Payment {
     }
 
     public void setSalary(double salary) {
-        if (salary < 0) throw new IllegalArgumentException("Оклад не може бути від'ємним");
+        if (salary < 0)
+            throw new IllegalArgumentException("Оклад не може бути від'ємним");
         this.salary = salary;
         calculate();
     }
@@ -172,7 +205,8 @@ public class Payment {
     }
 
     public void setBonusPercent(double bonusPercent) {
-        if (bonusPercent < 0) throw new IllegalArgumentException("Надбавка не може бути від'ємною");
+        if (bonusPercent < 0)
+            throw new IllegalArgumentException("Надбавка не може бути від'ємною");
         this.bonusPercent = bonusPercent;
         calculate();
     }
@@ -197,7 +231,7 @@ public class Payment {
         calculate();
     }
 
-    /* ---------- перевизначені методи Object ---------- */
+    /* перевизначені методи Object */
 
     @Override
     public String toString() {
@@ -210,8 +244,10 @@ public class Payment {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Payment other)) return false;
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Payment other))
+            return false;
         return lastName.equals(other.lastName)
                 && firstName.equals(other.firstName)
                 && Double.compare(salary, other.salary) == 0
